@@ -3,7 +3,8 @@ var webpack = require('webpack');
 
 module.exports = {
     entry: {
-        app: './js/main.js',
+        promise: './js/promise.js',
+        calculator: './js/calculator.js',
         ratefinder: './js/ratefinder.js'
     },
     output: {

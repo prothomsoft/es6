@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {    
-    "start": "http-server",
-    "webpack": "webpack"    
+  "scripts": {
+    "webpack": "webpack",    
+    "start": "http-server"
   },
   "repository": {
     "type": "git",
