@@ -1,10 +1,9 @@
-import * as mortage from './mortage';
+import Mortage  from './mortage';
 
-document.getElementById('calcBtn').addEventListener('click', function () {
-    var principal1 = document.getElementById("principal").value;
-    var years1 = document.getElementById("years").value;
-    var rate1 = document.getElementById("rate").value;
-
-    let { principal, years, rate, monthlyPayment, monthlyRate } = mortage.calculateMonthlyPayment(principal1, years1, rate1);
-    document.getElementById("monthlyPayment").innerHTML = monthlyPayment.toFixed(2);
+document.getElementById('calcBtn').addEventListener('click', () => {
+    let principal = document.getElementById("principal").value;
+    let years = document.getElementById("years").value;
+    let rate = document.getElementById("rate").value;
+    let mortage = new Mortage(principal, years, rate);
+    document.getElementById("monthlyPayment").innerHTML = mortage.monthlyPayment.toFixed(2);
 });
