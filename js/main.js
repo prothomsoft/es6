@@ -9,6 +9,7 @@ var calculateMonthlyPayment = function (principal, years, rate) {
 document.getElementById('calcBtn').addEventListener('click', function () {
     var change = "change1";
     var test= "test";
+    var test2  = "test2";
 
     var principal = document.getElementById("principal").value;
     var years = document.getElementById("years").value;
