@@ -46,7 +46,7 @@
 
 	'use strict';
 	
-	var _rateServiceMock = __webpack_require__(2);
+	var _rateServiceMock = __webpack_require__(3);
 	
 	var service = _interopRequireWildcard(_rateServiceMock);
 	
@@ -64,7 +64,8 @@
 
 /***/ },
 /* 1 */,
-/* 2 */
+/* 2 */,
+/* 3 */
 /***/ function(module, exports) {
 
 	"use strict";

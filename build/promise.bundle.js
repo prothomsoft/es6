@@ -42,42 +42,55 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	var _employeeServiceMock = __webpack_require__(2);
+	
+	var service = _interopRequireWildcard(_employeeServiceMock);
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
+	service.findAll().then(function (employees) {
+	    var html = "";
+	    employees.forEach(function (employee) {
+	        html += "<div>\n                        <img src='" + employee.picture + "'/>\n                        <div>\n                            " + employee.firstName + " " + employee.lastName + "\n                            <p>" + employee.phone + "</p>\n                        </div>\n                    </div>";
+	    });
+	    document.getElementById("list").innerHTML = html;
+	}).catch(function (error) {
+	    return console.log(error);
+	}); //import * as service from "./employee-service";
+
+/***/ },
+/* 1 */,
+/* 2 */
 /***/ function(module, exports) {
 
 	"use strict";
 	
-	// XMLHttpRequest wrapper using callbacks
-	function request(obj, successHandler, errorHandler) {
-	    var xhr = new XMLHttpRequest();
-	    xhr.open(obj.method || "GET", obj.url);
-	    if (obj.headers) {
-	        Object.keys(obj.headers).forEach(function (key) {
-	            xhr.setRequestHeader(key, obj.headers[key]);
-	        });
-	    }
-	    xhr.onload = function () {
-	        if (xhr.status >= 200 && xhr.status < 300) {
-	            successHandler(xhr.response);
-	        } else {
-	            errorHandler(xhr.statusText);
-	        }
-	    };
-	    xhr.onerror = function () {
-	        errorHandler(xhr.statusText);
-	    };
-	    xhr.send(obj.body);
-	}
-	
-	request({ url: "employees.json" }, function (data) {
-	    var employees = JSON.parse(data);
-	    var html = "";
-	    employees.forEach(function (employee) {
-	        html += "<div><img src='" + employee.picture + "'/><div>" + employee.firstName + " " + employee.lastName + "<p>" + employee.phone + "</p></div></div>";
-	    });
-	    document.getElementById("list").innerHTML = html;
-	}, function (error) {
-	    console.log(error);
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
 	});
+	var employees = [{
+	  id: 1,
+	  firstName: "Amy",
+	  lastName: "Taylor",
+	  phone: "617-564-3254",
+	  picture: "https://s3-us-west-1.amazonaws.com/sfdc-demo/people/amy_taylor.jpg"
+	}, {
+	  id: 2,
+	  firstName: "Anup",
+	  lastName: "Gupta",
+	  phone: "617-564-1258",
+	  picture: "https://s3-us-west-1.amazonaws.com/sfdc-demo/people/anup_gupta.jpg"
+	}];
+	
+	var findAll = exports.findAll = function findAll() {
+	  return new Promise(function (resolve) {
+	    return resolve(employees);
+	  });
+	};
 
 /***/ }
 /******/ ]);
