@@ -7,8 +7,8 @@ var calculateMonthlyPayment = function (principal, years, rate) {
 };
 
 document.getElementById('calcBtn').addEventListener('click', function () {
-    var change = "change";
-    
+    var change = "change1";
+
     var principal = document.getElementById("principal").value;
     var years = document.getElementById("years").value;
     var rate = document.getElementById("rate").value;
