@@ -42,29 +42,70 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var calculateMonthlyPayment = function calculateMonthlyPayment(principal, years, rate) {
-	    if (rate) {
-	        var monthlyRate = rate / 100 / 12;
-	    }
-	    var monthlyPayment = principal * monthlyRate / (1 - Math.pow(1 / (1 + monthlyRate), years * 12));
-	    return monthlyPayment;
-	};
+	var _mortage = __webpack_require__(1);
+	
+	var mortage = _interopRequireWildcard(_mortage);
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
 	document.getElementById('calcBtn').addEventListener('click', function () {
-	    var change = "change1";
-	    var test = "test";
-	    var test2 = "test2";
+	    var principal1 = document.getElementById("principal").value;
+	    var years1 = document.getElementById("years").value;
+	    var rate1 = document.getElementById("rate").value;
 	
-	    var principal = document.getElementById("principal").value;
-	    var years = document.getElementById("years").value;
-	    var rate = document.getElementById("rate").value;
-	    var monthlyPayment = calculateMonthlyPayment(principal, years, rate);
+	    var _mortage$calculateMon = mortage.calculateMonthlyPayment(principal1, years1, rate1),
+	        principal = _mortage$calculateMon.principal,
+	        years = _mortage$calculateMon.years,
+	        rate = _mortage$calculateMon.rate,
+	        monthlyPayment = _mortage$calculateMon.monthlyPayment,
+	        monthlyRate = _mortage$calculateMon.monthlyRate;
+	
 	    document.getElementById("monthlyPayment").innerHTML = monthlyPayment.toFixed(2);
 	});
+
+/***/ },
+/* 1 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	var calculateMonthlyPayment = exports.calculateMonthlyPayment = function calculateMonthlyPayment(principal, years, rate) {
+	    var monthlyRate = 0;
+	    if (rate) {
+	        monthlyRate = rate / 100 / 12;
+	    }
+	    var monthlyPayment = principal * monthlyRate / (1 - Math.pow(1 / (1 + monthlyRate), years * 12));
+	    return { principal: principal, years: years, rate: rate, monthlyPayment: monthlyPayment, monthlyRate: monthlyRate };
+	};
+	
+	var calculateAmortization = exports.calculateAmortization = function calculateAmortization(principal, years, rate) {
+	    var _calculateMonthlyPaym = calculateMonthlyPayment(principal, years, rate),
+	        monthlyRate = _calculateMonthlyPaym.monthlyRate,
+	        monthlyPayment = _calculateMonthlyPaym.monthlyPayment;
+	
+	    var balance = principal;
+	    var amortization = [];
+	    for (var y = 0; y < years; y++) {
+	        var interestY = 0; //Interest payment for year y
+	        var principalY = 0; //Principal payment for year y
+	        for (var m = 0; m < 12; m++) {
+	            var interestM = balance * monthlyRate; //Interest payment for month m
+	            var principalM = monthlyPayment - interestM; //Principal payment for month m
+	            interestY = interestY + interestM;
+	            principalY = principalY + principalM;
+	            balance = balance - principalM;
+	        }
+	        amortization.push({ principalY: principalY, interestY: interestY, balance: balance });
+	    }
+	    return { monthlyPayment: monthlyPayment, monthlyRate: monthlyRate, amortization: amortization };
+	};
 
 /***/ }
 /******/ ]);

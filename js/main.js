@@ -1,19 +1,10 @@
-var calculateMonthlyPayment = function (principal, years, rate) {
-    if (rate) {
-        var monthlyRate = rate / 100 / 12;
-    }
-    var monthlyPayment = principal * monthlyRate / (1 - (Math.pow(1 / (1 + monthlyRate), years * 12)));
-    return monthlyPayment;
-};
+import * as mortage from './mortage';
 
 document.getElementById('calcBtn').addEventListener('click', function () {
-    var change = "change1";
-    var test= "test";
-    var test2  = "test2";
+    var principal1 = document.getElementById("principal").value;
+    var years1 = document.getElementById("years").value;
+    var rate1 = document.getElementById("rate").value;
 
-    var principal = document.getElementById("principal").value;
-    var years = document.getElementById("years").value;
-    var rate = document.getElementById("rate").value;
-    var monthlyPayment = calculateMonthlyPayment(principal, years, rate);
+    let { principal, years, rate, monthlyPayment, monthlyRate } = mortage.calculateMonthlyPayment(principal1, years1, rate1);
     document.getElementById("monthlyPayment").innerHTML = monthlyPayment.toFixed(2);
 });
