@@ -1,7 +1,6 @@
 //import * as service from "./employee-service";
 import * as service from "./employee-service-mock";
 
-
 service.findAll()
     .then(employees => {
         let html = "";
