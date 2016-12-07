@@ -1,11 +1,11 @@
 import React from 'react';
 import {render} from 'react-dom';
-require('./styles.css')
+require('./css/styles.css')
 
 class App extends React.Component {
   render () {
-    return <div class="intro-component">
-              <h1>nice job</h1>
+    return <div className='intro-component'>
+              <h1>nice job 3</h1>
            </div>;
   }
 }

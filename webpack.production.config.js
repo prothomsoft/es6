@@ -1,6 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var WebpackCleanupPlugin = require('webpack-cleanup-plugin');
 
 const HOST = process.env.HOST || "127.0.0.1";
 const PORT = process.env.PORT || "8888";
@@ -11,7 +12,7 @@ module.exports = {
         //promise: './js/promise.js',
         //calculator: './js/calculator.js',
         //ratefinder: './js/ratefinder.js'
-    },
+    },    
     output: {
         path: path.resolve(__dirname, 'build'),
         filename: '[name].bundle.js'
@@ -29,25 +30,30 @@ module.exports = {
                 loader: "style-loader!css-loader" 
             }
         ]
-    },   
-    devServer: {
-		contentBase: "./public",
-		// do not print bundle build stats
-		noInfo: true,
-		// enable HMR
-		hot: true,
-		// embed the webpack-dev-server runtime into the bundle
-		inline: true,
-		// serve index.html in place of 404 responses to allow HTML5 history
-		historyApiFallback: true,
-		port: PORT,
-		host: HOST
-	},
-	plugins: [
-		new webpack.NoErrorsPlugin(),
-		new webpack.HotModuleReplacementPlugin(),
-		new HtmlWebpackPlugin({
-			template: './react_app.html'
+    },
+    stats: {
+        colors: true
+    },
+    plugins: [
+		new WebpackCleanupPlugin(),
+		new webpack.DefinePlugin({
+			'process.env': {
+				NODE_ENV: '"production"'
+			}
 		}),
-	]    
+		new webpack.optimize.UglifyJsPlugin({
+			compress: {
+				warnings: false,
+				screw_ie8: true,
+				drop_console: true,
+				drop_debugger: true
+			}
+		}),
+		new webpack.optimize.OccurenceOrderPlugin(),        
+		new HtmlWebpackPlugin({
+			template: './react_app.html',
+			title: 'Webpack App'
+		}),
+		new webpack.optimize.DedupePlugin()
+	]
 };
