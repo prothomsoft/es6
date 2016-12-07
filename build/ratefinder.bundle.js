@@ -1,2 +1,98 @@
-!function(e){function t(n){if(r[n])return r[n].exports;var o=r[n]={exports:{},id:n,loaded:!1};return e[n].call(o.exports,o,o.exports,t),o.loaded=!0,o.exports}var r={};return t.m=e,t.c=r,t.p="",t(0)}({0:function(e,t,r){"use strict";function n(e){if(e&&e.__esModule)return e;var t={};if(null!=e)for(var r in e)Object.prototype.hasOwnProperty.call(e,r)&&(t[r]=e[r]);return t.default=e,t}var o=r(82),a=n(o);a.findAll().then(function(e){var t="";e.forEach(function(e){return t+="<tr><td>"+e.name+"</td><td>"+e.years+"</td><td>"+e.rate+"%</td></tr>"}),document.getElementById("rates").innerHTML=t}).catch(function(e){return console.log(e)})},82:function(e,t){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var r=[{name:"30 years fixed",rate:"13",years:"30"},{name:"20 years fixed",rate:"2.8",years:"20"}];t.findAll=function(){return new Promise(function(e,t){r?e(r):t("No rates")})}}});
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId])
+/******/ 			return installedModules[moduleId].exports;
+/******/
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			exports: {},
+/******/ 			id: moduleId,
+/******/ 			loaded: false
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.loaded = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _rateServiceMock = __webpack_require__(3);
+	
+	var service = _interopRequireWildcard(_rateServiceMock);
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
+	service.findAll().then(function (rates) {
+	    var html = '';
+	    rates.forEach(function (rate) {
+	        return html += '<tr><td>' + rate.name + '</td><td>' + rate.years + '</td><td>' + rate.rate + '%</td></tr>';
+	    });
+	    document.getElementById("rates").innerHTML = html;
+	}).catch(function (e) {
+	    return console.log(e);
+	});
+
+/***/ },
+/* 1 */,
+/* 2 */,
+/* 3 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	var rates = [{
+	    "name": "30 years fixed",
+	    "rate": "13",
+	    "years": "30"
+	}, {
+	    "name": "20 years fixed",
+	    "rate": "2.8",
+	    "years": "20"
+	}];
+	
+	var findAll = exports.findAll = function findAll() {
+	    return new Promise(function (resolve, reject) {
+	        if (rates) {
+	            resolve(rates);
+	        } else {
+	            reject("No rates");
+	        }
+	    });
+	};
+
+/***/ }
+/******/ ]);
 //# sourceMappingURL=ratefinder.bundle.js.map
