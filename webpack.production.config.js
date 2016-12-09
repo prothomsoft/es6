@@ -9,9 +9,6 @@ const PORT = process.env.PORT || "8888";
 module.exports = {
     entry: {
         react_app: './react_app.js'
-        //promise: './js/promise.js',
-        //calculator: './js/calculator.js',
-        //ratefinder: './js/ratefinder.js'
     },    
     output: {
         path: path.resolve(__dirname, 'build'),
@@ -51,8 +48,7 @@ module.exports = {
 		}),
 		new webpack.optimize.OccurenceOrderPlugin(),        
 		new HtmlWebpackPlugin({
-			template: './react_app.html',
-			title: 'Webpack App'
+			template: './react_app.html'
 		}),
 		new webpack.optimize.DedupePlugin()
 	]

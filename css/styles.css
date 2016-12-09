@@ -1,5 +1,6 @@
 .intro-component {
-    padding: 15px;
-    background: #dedede;
+    padding: 40px;
+    background: #666;
+    border: 1px solid #FFF;
     color: #fff;    
 }

@@ -3,14 +3,11 @@ var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const HOST = process.env.HOST || "127.0.0.1";
-const PORT = process.env.PORT || "8888";
+const PORT = process.env.PORT || "8080";
 
 module.exports = {
     entry: {
         react_app: './react_app.js'
-        //promise: './js/promise.js',
-        //calculator: './js/calculator.js',
-        //ratefinder: './js/ratefinder.js'
     },
     output: {
         path: path.resolve(__dirname, 'build'),
@@ -39,7 +36,7 @@ module.exports = {
 		// embed the webpack-dev-server runtime into the bundle
 		inline: true,
 		// serve index.html in place of 404 responses to allow HTML5 history
-		historyApiFallback: true,
+		historyApiFallback: false,
 		port: PORT,
 		host: HOST
 	},
